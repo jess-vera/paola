@@ -7,10 +7,7 @@
 <meta name="description" content="Draw a gesture. AI interprets it as a biosignal. By Jess Adriana Rivera.">
 <meta name="author" content="Jess Adriana Rivera">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
-<!--
-  TO USE FUTURA PT: Add your Adobe Fonts kit embed below.
-  Example: <link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css">
--->
+
 <style>
   :root {
     --bg: #ffffff;
@@ -162,7 +159,7 @@
   Built with p5.js and Google Gemini API.
 */
 
-let API_KEY = 'PASTE_YOUR_KEY_HERE';
+let API_KEY = 'AIzaSyCufBsxEN3-mlQ4iumkaHS6Jp9v835njPg';
 
 let allStrokes = [];
 let animatedStrokes = [];
@@ -180,7 +177,6 @@ let interpretTime = 0;
 let signalTypeEl, signalDescEl, bandIndicatorEl;
 let instructionsEl, processingEl;
 
-// FIX #2: Much more saturated, distinct colors per band
 const BANDS = {
   rest:   { color: [275, 70, 55], size: [10, 26], label: 'REST',  behavior: 'drift' },
   drift:  { color: [180, 80, 50], size: [5, 16],  label: 'DRIFT', behavior: 'morph' },
@@ -200,7 +196,6 @@ function setup() {
   }
 }
 
-// FIX #3: Updated instructions to mention mouse/trackpad
 function buildUI() {
   createDiv('PAOLA').class('corner-label tl tl-title');
   bandIndicatorEl = createDiv('').class('corner-label tr');
@@ -249,7 +244,6 @@ function draw() {
 
   drawAmbientRipples();
 
-  // FIX #1: After interpretation, strokes animate instead of staying static
   if (isInterpreted && animatedStrokes.length > 0) {
     let elapsed = millis() - interpretTime;
     let dissolveProgress = constrain(elapsed / 4000, 0, 1);
@@ -282,7 +276,6 @@ function draw() {
   }
 }
 
-// FIX #1: Animated stroke class - points drift apart based on band behavior
 function drawAnimatedStroke(as, progress) {
   if (as.points.length < 2) return;
   let cfg = BANDS[currentBand] || BANDS.calm;
@@ -467,7 +460,7 @@ function clearCanvas() {
 }
 
 async function interpretDrawing() {
-  if (!API_KEY || API_KEY === 'PASTE_YOUR_KEY_HERE') {
+  if (!API_KEY || API_KEY === 'AIzaSyCufBsxEN3-mlQ4iumkaHS6Jp9v835njPg') {
     console.error('No API key set');
     return;
   }
@@ -553,7 +546,6 @@ function applyInterpretation(result) {
   currentBand = band;
   let cfg = BANDS[band];
 
-  // FIX #2: Use full saturation for label colors
   signalTypeEl.html(cfg.label + ' WAVE');
   signalTypeEl.style('color', 'hsl(' + cfg.color[0] + ',' + cfg.color[1] + '%,' + cfg.color[2] + '%)');
   signalTypeEl.style('opacity', '1');
@@ -564,7 +556,6 @@ function applyInterpretation(result) {
   bandIndicatorEl.html(cfg.label);
   bandIndicatorEl.style('color', 'hsl(' + cfg.color[0] + ',' + cfg.color[1] + '%,' + cfg.color[2] + '%)');
 
-  // FIX #1: Convert static strokes to animated strokes
   isInterpreted = true;
   interpretTime = millis();
   animatedStrokes = [];
@@ -583,7 +574,6 @@ function applyInterpretation(result) {
   }
 }
 
-// FIX #2: Particles render at full saturation with proper contrast on white
 class Particle {
   constructor(x, y, bandCfg) {
     this.x = x + random(-5, 5);
