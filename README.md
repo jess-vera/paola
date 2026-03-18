@@ -1,8 +1,8 @@
 # PAOLA
 
-A biosignal drawing interpreter.
+An AI generative art biosignal drawing interpreter.
 
-Draw on the canvas with your mouse or trackpad, then press SPACE. AI analyzes the visual qualities of your gesture—speed, rhythm, pressure, curvature, spatial distribution—as a proxy for your body's current state. Your strokes transform and reactive particles emerge, each behavior shaped by the detected signal pattern.
+Draw on the canvas with your mouse or trackpad, then press SPACE. AI analyzes the visual qualities of your gesture__speed, rhythm, pressure, curvature, spatial distribution__as a proxy for your body's current state. Your strokes transform and reactive particles emerge, each behavior shaped by the detected signal pattern.
 
 The way you move your hand reveals something about your nervous system. PAOLA reads that trace.
 
